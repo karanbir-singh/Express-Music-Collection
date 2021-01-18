@@ -42,6 +42,9 @@ const genres = [
     { id: 5, type: "Punk rock" },
     { id: 6, type: "Jazz" },];
 
+//* Insieme di tutto
+
+
 //> Root: ritorna un oggetto json con esempi di possibili route a cui il server risponde.
 app.get('/', (req, res) => {
     res.send({});
@@ -49,35 +52,17 @@ app.get('/', (req, res) => {
 
 //> Elenco di tutti i dischi: `GET /vinyls`
 app.get('/vinyls', (req, res) => {
-    res.send([{
-        title: "disco 1",
-        author: 1
-    }, {
-        title: "disco 2",
-        author: 2
-    }]);
+    res.send(disks);
 });
 
 //> Elenco degli autori: `GET /authors`
 app.get('/authors', (req, res) => {
-    res.send([{
-        name: 'Eminem',
-        id: 1
-    }, {
-        titolo: "Nirvana",
-        id: 2
-    }]);
+    res.send(authors);
 });
 
 //> Elenco dei generi: `GET /genres`
 app.get('/genres', (req, res) => {
-    res.send([{
-        type: 'Jazz',
-        id: 1
-    }, {
-        titolo: "Pop",
-        id: 2
-    }]);
+    res.send(genres);
 });
 
 //> Recupera informazioni su un disco: `GET /vinyls/:id` 
