@@ -1,6 +1,6 @@
 # Operazioni
 
-- `/` : ritorna un oggetto json con esempi di possibili route a cui il server risponde. (swagger)
+- `(root)/` : ritorna un oggetto json con esempi di possibili route a cui il server risponde. (swagger)
 
 * definire le collezioni
 * definire le relazioni tra elementi delle collezioni
