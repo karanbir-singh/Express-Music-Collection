@@ -7,13 +7,13 @@ const app = express();
 const hostname = 'localhost';
 const port = 3000;
 
-//* Root: ritorna un oggetto json con esempi di possibili route a cui il server risponde.
+//> Root: ritorna un oggetto json con esempi di possibili route a cui il server risponde.
 app.get('/', (req,res) => {
     //
     res.send({});
 });
 
-//* Elenco di tutti i dischi: `GET /vinyls`
+//> Elenco di tutti i dischi: `GET /vinyls`
 app.get('/vinyls', (req,res) => {
     res.send([{
         title:"disco 1",
@@ -24,7 +24,7 @@ app.get('/vinyls', (req,res) => {
     }]);
 });
 
-//* Elenco degli autori: `GET /authors/`
+//> Elenco degli autori: `GET /authors/`
 app.get('/authors', (req,res) => {
     res.send([{
         name: 'Eminem',
@@ -35,8 +35,7 @@ app.get('/authors', (req,res) => {
     }]);
 });
 
-
-//* Elenco dei generi: `GET /genres`
+//> Elenco dei generi: `GET /genres`
 app.get('/genres', (req,res) => {
     res.send([{
         type: 'Jazz',
@@ -47,7 +46,7 @@ app.get('/genres', (req,res) => {
     }]);
 });
 
-//* Recupera informazioni su un disco: `GET /vinyls/:id` 
+//> Recupera informazioni su un disco: `GET /vinyls/:id` 
 app.get('/vinyls/:id', (req,res) => {
     const { id } = req.params;
 
@@ -57,10 +56,10 @@ app.get('/vinyls/:id', (req,res) => {
     res.send({});
 });
 
-//* Recupera tutti i dischi di un autore: `GET /authors/:authorID/vinyls`
-//* Recupera i dischi di un genere: `GET /genres/:id/vinyls` 
+//> Recupera tutti i dischi di un autore: `GET /authors/:authorID/vinyls`
+//> Recupera i dischi di un genere: `GET /genres/:id/vinyls` 
 
-//* Server in ascolto...
+//> Server in ascolto...
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
