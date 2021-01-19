@@ -125,7 +125,7 @@ app.get('/genres/:genreId/vinyls', (req, res) => {
     const { genreId } = req.params;
     const disks = (data.filter((disk) => { return disk.genre.id == genreId; })).map((x) => { return x.title });
     res.send({ disks });
-}); 
+});
 
 //> Server in ascolto...
 app.listen(port, () => {

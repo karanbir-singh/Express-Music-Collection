@@ -24,7 +24,7 @@ Gestione collezione di dischi in vinile.
 - autore > dischi
 
 ## REST
-Primo approccio per ragionare in termini di collezioni e relazioni utilizzando i verbi HTTP.
+Primo approccio per ragionare in termini di collection e risorse utilizzando i verbi HTTP.
 
 ##### Una richiesta rest e' fatta in questo modo:
 
