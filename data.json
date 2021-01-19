@@ -1,28 +1,28 @@
-{
-    "diskId": 1,
-    "title": "Sgt. Pepper's Lonely Hearts Club Band",
-    "genre": {
-        "id": 1,
-        "type": "Pop rock"
-    },
-    "author": {
-        "id": 1,
-        "name": "The Beatles"
-    },
-},
-{
-    "diskId": 2,
-    "title": "Exile on Main St.",
-    "genre": {
-        "id": 1,
-        "type": "Pop rock"
-    },
-    "author": {
-        "id": 2,
-        "name": "The Rolling Stones"
-    },
-},
 [
+    {
+        "diskId": 1,
+        "title": "Sgt. Pepper's Lonely Hearts Club Band",
+        "genre": {
+            "id": 1,
+            "type": "Pop rock"
+        },
+        "author": {
+            "id": 1,
+            "name": "The Beatles"
+        }
+    },
+    {
+        "diskId": 2,
+        "title": "Exile on Main St.",
+        "genre": {
+            "id": 1,
+            "type": "Pop rock"
+        },
+        "author": {
+            "id": 2,
+            "name": "The Rolling Stones"
+        }
+    },
     {
         "diskId": 3,
         "title": "Led Zeppelin",
@@ -33,7 +33,7 @@
         "author": {
             "id": 3,
             "name": "Led Zeppelin"
-        },
+        }
     },
     {
         "diskId": 4,
@@ -45,7 +45,7 @@
         "author": {
             "id": 4,
             "name": "David Bowie"
-        },
+        }
     },
     {
         "diskId": 5,
@@ -57,7 +57,7 @@
         "author": {
             "id": 5,
             "name": "Miles Davis"
-        },
+        }
     },
     {
         "diskId": 6,
@@ -69,6 +69,6 @@
         "author": {
             "id": 6,
             "name": "John Coltrane"
-        },
+        }
     }
 ]
