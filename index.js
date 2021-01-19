@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 
 //* Oggetto express
 const app = express();
@@ -7,81 +8,12 @@ const app = express();
 const hostname = 'localhost';
 const port = 3000;
 
+
 //* Collezioni
-const data = [
-    {
-        diskId: 1,
-        title: "Sgt. Pepper's Lonely Hearts Club Band",
-        genre: {
-            id: 1,
-            type: "Pop rock"
-        },
-        author: {
-            id: 1,
-            name: "The Beatles"
-        },
-    },
-    {
-        diskId: 2,
-        title: "Exile on Main St.",
-        genre: {
-            id: 1,
-            type: "Pop rock"
-        },
-        author: {
-            id: 2,
-            name: "The Rolling Stones"
-        },
-    },
-    {
-        diskId: 3,
-        title: "Led Zeppelin",
-        genre: {
-            id: 2,
-            type: "Hard rock"
-        },
-        author: {
-            id: 3,
-            name: "Led Zeppelin"
-        },
-    },
-    {
-        diskId: 4,
-        title: "The Rise and Fall of Ziggy Stardust and the Spiders from Mars",
-        genre: {
-            id: 3,
-            type: "Punk rock"
-        },
-        author: {
-            id: 4,
-            name: "David Bowie"
-        },
-    },
-    {
-        diskId: 5,
-        title: "Bitches Brew",
-        genre: {
-            id: 4,
-            type: "Jazz"
-        },
-        author: {
-            id: 5,
-            name: "Miles Davis"
-        },
-    },
-    {
-        diskId: 6,
-        title: "A love supreme",
-        genre: {
-            id: 4,
-            type: "Jazz"
-        },
-        author: {
-            id: 6,
-            name: "John Coltrane"
-        },
-    },
-];
+const data = JSON.parse((fs.readFileSync("./data.json")).toString());
+
+//TODO per scrivere data su file uso fs.writeFileSync
+//TODO come faccio a scrivere delle funzioni che leggono e scrivono dati dal "db" da poter chiamare da express?
 
 //> Root: ritorna un oggetto json con esempi di possibili route a cui il server risponde.
 app.get('/', (req, res) => {
@@ -125,7 +57,7 @@ app.get('/genres/:genreId/vinyls', (req, res) => {
     const { genreId } = req.params;
     const disks = (data.filter((disk) => { return disk.genre.id == genreId; })).map((x) => { return x.title });
     res.send({ disks });
-}); 
+});
 
 //> Server in ascolto...
 app.listen(port, () => {
