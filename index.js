@@ -8,12 +8,18 @@ const app = express();
 const hostname = 'localhost';
 const port = 3000;
 
+//Lettura del file
+function getData(fileUrl) {
+    return JSON.parse((fs.readFileSync(fileUrl)).toString());
+}
+
+//Scrittura su file (o meglio, aggiunta di nuovi dati)
+function addData(fileUrl, data) {
+    fs.appendFileSync(fileUrl, JSON.stringify(data));
+}
 
 //* Collezioni
-const data = JSON.parse((fs.readFileSync("./data.json")).toString());
-
-//TODO per scrivere data su file uso fs.writeFileSync
-//TODO come faccio a scrivere delle funzioni che leggono e scrivono dati dal "db" da poter chiamare da express?
+const data = getData("./data.json");
 
 //> Root: ritorna un oggetto json con esempi di possibili route a cui il server risponde.
 app.get('/', (req, res) => {
