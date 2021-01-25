@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "The Beatles"
+    },
+    {
+        "id": 2,
+        "name": "The Rolling Stones"
+    },
+    {
+        "id": 3,
+        "name": "Led Zeppelin"
+    },
+    {
+        "id": 4,
+        "name": "David Bowie"
+    },
+    {
+        "id": 5,
+        "name": "Miles Davis"
+    },
+    {
+        "id": 6,
+        "name": "John Coltrane"
+    }
+]

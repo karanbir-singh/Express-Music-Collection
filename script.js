@@ -1,4 +1,5 @@
 const fileSystem = require('fs');
+const { get } = require('http');
 
 module.exports = {
     //GET Tutte le info
@@ -33,9 +34,19 @@ function addData(fileUrl, data) {
 
 //!---------------------------------------------------------------------------------------------------------------------------------------
 
+//Collezioni
+const vinyls = getData("./data/vinyls.json");
+const authors = getData("./data/authors.json");
+const genres = getData("./data/genres.json");
+
 //Ritorna una lista di tutti i dischi
-function getAllVinyls(data) {
-    return data.map((disk) => { return disk.title });
+function getAllVinyls() {
+    vinyls.forEach(vinyl => {
+        vinyl.author = (authors.filter((author) => { return author.id == vinyl.author }))[0].name;
+        vinyl.genre= (genres.filter((genre) => { return genre.id == vinyl.genre }))[0].type;
+    });
+
+    return vinyls;
 }
 
 //Ritorna una lista di tutti gli autori
@@ -51,18 +62,17 @@ function getAllGenres(data) {
 //!---------------------------------------------------------------------------------------------------------------------------------------
 
 //Ritorna le informazioni riguardo al disco richiesto (viene fornito l'id del vinile)
-function getVinylInfo(data,diskId) {
+function getVinylInfo(data, diskId) {
     return data.filter((disk) => { return disk.diskId == diskId; });
 }
 
 //Ritorna una lista di dischi di un dato autore (viene fornito l'id dell'autore)
-function getAuthorVinyls(data,authorId) {
-    debugger;
+function getAuthorVinyls(data, authorId) {
     return (data.filter((disk) => { return disk.author.id == authorId; })).map((x) => { return x.title });
 }
 
 //Ritorna una lista di dischi per genere (viene fornito l'id dell'genere)
-function getVinylsByGenre(data,genreId) {
+function getVinylsByGenre(data, genreId) {
     return (data.filter((disk) => { return disk.genre.id == genreId; })).map((x) => { return x.title });
 }
 

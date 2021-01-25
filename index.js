@@ -1,5 +1,4 @@
 const express = require('express');
-
 const fs = require('./script.js');
 const cors = require('cors');
 
@@ -7,7 +6,7 @@ const cors = require('cors');
 const app = express();
 
 //Content-Type: application/json e CORS
-app.use(express.json);
+app.use(express.json());
 app.use(cors());
 
 //* Socket
@@ -15,7 +14,7 @@ const hostname = 'localhost';
 const port = 3000;
 
 //* Collezioni
-const data = fs.getData("./data.json");
+const data = fs.getData("./data/data.json");
 
 //> Root: ritorna un oggetto json con esempi di possibili route a cui il server risponde.
 app.get('/', (req, res) => {
@@ -42,30 +41,28 @@ app.get('/genres', (req, res) => {
 
 //> Recupera informazioni su un disco: `GET /vinyls/:id` 
 app.get('/vinyls/:diskId', (req, res) => {
-    const disk = fs.getVinylInfo(data,req.params.diskId);
+    const disk = fs.getVinylInfo(data, req.params.diskId);
     res.send(...disk);
 });
 
 //> Recupera tutti i dischi di un autore: `GET /authors/:authorID/vinyls`
 app.get('/authors/:authorId/vinyls', (req, res) => {
-    const disks = fs.getAuthorVinyls(data,req.params.authorId);
+    const disks = fs.getAuthorVinyls(data, req.params.authorId);
     res.send({ disks });
 });
 
 //> Recupera i dischi di un genere: `GET /genres/:id/vinyls`
 app.get('/genres/:genreId/vinyls', (req, res) => {
-    const disks = fs.getVinylsByGenre(data,req.params.genreId);
+    const disks = fs.getVinylsByGenre(data, req.params.genreId);
     res.send({ disks });
 });
 
 //TODO richieste POST, ma è privato
+app.post('/', (req, res) => {
+
+});
 
 //> Server in ascolto...
 app.listen(port, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
-
-
-// const uuid = require("uuid");
-
-// console.log(uuid.v4());

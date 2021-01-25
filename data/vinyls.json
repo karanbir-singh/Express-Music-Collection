@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "title": "Sgt. Pepper's Lonely Hearts Club Band",
+        "author": 1,
+        "genre": 1
+    },
+    {
+        "id": 2,
+        "title": "Exile on Main St.",
+        "author": 2,
+        "genre": 1
+    },
+    {
+        "id": 3,
+        "title": "Led Zeppelin",
+        "author": 3,
+        "genre": 2
+    },
+    {
+        "id": 4,
+        "title": "The Rise and Fall of Ziggy Stardust and the Spiders from Mars",
+        "author": 4,
+        "genre": 3
+    },
+    {
+        "id": 5,
+        "title": "Bitches Brew",
+        "author": 5,
+        "genre": 4
+    },
+    {
+        "id": 6,
+        "title": "A love supreme",
+        "author": 6,
+        "genre": 1
+    }
+]

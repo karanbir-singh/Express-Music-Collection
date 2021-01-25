@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "type": "Pop rock"
+    },
+    {
+        "id": 2,
+        "type": "Hard rock"
+    },
+    {
+        "id": 3,
+        "type": "Punk rock"
+    },
+    {
+        "id": 4,
+        "type": "Jazz"
+    }
+]
