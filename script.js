@@ -1,17 +1,18 @@
 const fileSystem = require('fs');
 
 module.exports = {
-    //GET Tutte le info
+    //GETs
     getAllVinyls,
     getAllAuthors,
     getAllGenres,
-
-    //GET Info specifiche
     getVinylInfo,
     getAuthorVinyls,
     getVinylsByGenre,
 
-    //POST dati
+    //POSTs
+    postVinyl,
+    postAuthor,
+    postGenre,
 
     //File system
     getData,
@@ -28,7 +29,7 @@ function getData(fileUrl) {
 
 //Scrittura su file (o meglio, aggiunta di nuovi dati)
 function addData(fileUrl, data) {
-    fileSystem.appendFileSync(fileUrl, JSON.stringify(data));
+    fileSystem.writeFileSync(fileUrl, JSON.stringify(data));
 }
 
 //!---------------------------------------------------------------------------------------------------------------------------------------
@@ -99,3 +100,22 @@ function getVinylsByGenre(genreId) {
 }
 
 //!---------------------------------------------------------------------------------------------------------------------------------------
+
+//Aggiunge un nuovo disco
+function postVinyl(data){
+    vinyls.push(data);
+    addData("./data/vinyls.json",vinyls);
+}
+
+//Aggiunge un nuovo autore
+function postAuthor(data){
+    authors.push(data);
+    addData("./data/authors.json",authors);
+}
+
+//Aggiunge un nuovo genere
+function postGenre(data){
+    genres.push(data);
+    addData("./data/genres.json",genres);
+}
+
