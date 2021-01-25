@@ -1,5 +1,5 @@
 const express = require('express');
-const fileSystem = require('fs');
+
 const fs = require('./script.js');
 const cors = require('cors');
 
@@ -8,7 +8,7 @@ const app = express();
 
 //Content-Type: application/json e CORS
 app.use(express.json);
-app.use(express.cors);
+app.use(cors());
 
 //* Socket
 const hostname = 'localhost';
