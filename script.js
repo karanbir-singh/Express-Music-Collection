@@ -66,10 +66,10 @@ function getAllGenres() {
 
 //Ritorna le informazioni riguardo al disco richiesto (viene fornito l'id del vinile)
 function getVinylInfo(diskId) {
-    let disk = vinyls.find((vinyl) => { return vinyl.id == diskId });
+    let disk = vinyls.find((vinyl) => { return vinyl.id === parseInt(diskId) });
 
-    let authorName = (authors.filter((author) => { return author.id == disk.author }))[0].name;
-    let genreType = (genres.filter((genre) => { return genre.id == disk.genre }))[0].type;
+    let authorName = (authors.filter((author) => { return author.id === disk.author }))[0].name;
+    let genreType = (genres.filter((genre) => { return genre.id === disk.genre }))[0].type;
     disk = { ...disk, author: authorName, genre: genreType };
 
     return disk;
@@ -77,11 +77,11 @@ function getVinylInfo(diskId) {
 
 //Ritorna una lista di dischi di un dato autore (viene fornito l'id dell'autore)
 function getAuthorVinyls(authorId) {
-    let disks = [...vinyls].filter((vinyl) => { return vinyl.author == authorId });
+    let disks = [...vinyls].filter((vinyl) => { return vinyl.author === parseInt(authorId) });
 
     disks.forEach((disk, index, arr) => {
-        let authorName = (authors.filter((author) => { return author.id == disk.author }))[0].name;
-        let genreType = (genres.filter((genre) => { return genre.id == disk.genre }))[0].type;
+        let authorName = (authors.filter((author) => { return author.id === disk.author }))[0].name;
+        let genreType = (genres.filter((genre) => { return genre.id === disk.genre }))[0].type;
         arr[index] = { ...disk, author: authorName, genre: genreType };
     });
     return disks;
@@ -89,11 +89,11 @@ function getAuthorVinyls(authorId) {
 
 //Ritorna una lista di dischi per genere (viene fornito l'id dell'genere)
 function getVinylsByGenre(genreId) {
-    let disks = [...vinyls].filter((vinyl) => { return vinyl.genre == genreId });
+    let disks = [...vinyls].filter((vinyl) => { return vinyl.genre === parseInt(genreId) });
 
     disks.forEach((disk, index, arr) => {
-        let authorName = (authors.filter((author) => { return author.id == disk.author }))[0].name;
-        let genreType = (genres.filter((genre) => { return genre.id == disk.genre }))[0].type;
+        let authorName = (authors.filter((author) => { return author.id === disk.author }))[0].name;
+        let genreType = (genres.filter((genre) => { return genre.id === disk.genre }))[0].type;
         arr[index] = { ...disk, author: authorName, genre: genreType };
     });
     return disks;
@@ -101,25 +101,58 @@ function getVinylsByGenre(genreId) {
 
 //!---------------------------------------------------------------------------------------------------------------------------------------
 
+//Ritorna il nuovo id
+function getNewId(arr) {
+    return arr[arr.length - 1].id + 1;
+}
+
+//Ritorna l'id del valore di una collezione, passati come parametri
+function getValueId(prop, val, arr) {
+    const obj = arr.find((elem) => { return elem[prop] === val });
+    //Se non trova delle corrispondenze, ritorna null
+    if(obj === undefined){
+        return null;
+    }
+    return obj.id;
+}
+
 //Aggiunge un nuovo disco
 function postVinyl(data) {
-    vinyls.push(data);
+    const newVinyl = { id: getNewId(vinyls), ...data };
+
+    let authorId = getValueId("name", newVinyl.author, authors);
+    let genreId = getValueId("type", newVinyl.genre, genres);
+
+    if (authorId !== null) {
+        newVinyl.author = authorId;
+    }
+    if (genreId !== null) {
+        newVinyl.genre = genreId;
+    }
+
+    //! L'utente darà { title: "titolo", author: "nome autore", genre: "tipo genere"} 
+    //TODO l'utente passa dei dati solo con un nuovo titolo, ma autore e genere esistente nelle collezioni
+    //TODO -> assegnare ad author l'id in base alla collezione già presente, cosi come per il genere
+
+
+    //TODO l'utente passa dei dati con un nuovo titolo, ma anche nuovo autore o anche un nuovo genere
+    //TODO -> aggiungere un nuovo autore o un nuovo genere, e eseguire l'operazione precedente
+
+    vinyls.push(newVinyl);
     addData("./data/vinyls.json", vinyls);
 }
 
 //Aggiunge un nuovo autore
 function postAuthor(data) {
-    let lastId = authors[authors.length - 1].id + 1;
-    data = { ...data, id: lastId };
-    authors.push(data);
+    const newAuthor = { id: getNewId(authors), ...data };
+    authors.push(newAuthor);
     addData("./data/authors.json", authors);
 }
 
 //Aggiunge un nuovo genere
 function postGenre(data) {
-    let lastId = authors[authors.length - 1].id + 1;
-    data = { ...data, id: lastId };
-    genres.push(data);
+    const newGenre = { id: getNewId(genres), ...data };
+    genres.push(genre);
     addData("./data/genres.json", genres);
 }
 

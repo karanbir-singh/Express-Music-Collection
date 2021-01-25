@@ -68,7 +68,8 @@ app.post('/vinyls', (req, res) => {
         fs.postVinyl(req.body);
         res.sendStatus(200);
     } catch (err) {
-        console.error("Errore nell'aggiunta di un vinile");
+        //console.error("Errore nell'aggiunta di un vinile");
+        console.error(err);
         res.sendStatus(500);
     }
 });
