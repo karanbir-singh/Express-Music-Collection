@@ -102,20 +102,24 @@ function getVinylsByGenre(genreId) {
 //!---------------------------------------------------------------------------------------------------------------------------------------
 
 //Aggiunge un nuovo disco
-function postVinyl(data){
+function postVinyl(data) {
     vinyls.push(data);
-    addData("./data/vinyls.json",vinyls);
+    addData("./data/vinyls.json", vinyls);
 }
 
 //Aggiunge un nuovo autore
-function postAuthor(data){
+function postAuthor(data) {
+    let lastId = authors[authors.length - 1].id + 1;
+    data = { ...data, id: lastId };
     authors.push(data);
-    addData("./data/authors.json",authors);
+    addData("./data/authors.json", authors);
 }
 
 //Aggiunge un nuovo genere
-function postGenre(data){
+function postGenre(data) {
+    let lastId = authors[authors.length - 1].id + 1;
+    data = { ...data, id: lastId };
     genres.push(data);
-    addData("./data/genres.json",genres);
+    addData("./data/genres.json", genres);
 }
 
