@@ -110,33 +110,43 @@ function getNewId(arr) {
 function getValueId(prop, val, arr) {
     const obj = arr.find((elem) => { return elem[prop] === val });
     //Se non trova delle corrispondenze, ritorna null
-    if(obj === undefined){
+    if (obj === undefined) {
         return null;
     }
     return obj.id;
+}
+
+//Effettua il controllo dei dati mandati dall'utente per aggiungere un nuovo disco
+function formatPostVinylData(){
+    //TODO spostare e generalizzare i controlli effettuati nella funzione postVinyl()
 }
 
 //Aggiunge un nuovo disco
 function postVinyl(data) {
     const newVinyl = { id: getNewId(vinyls), ...data };
 
-    let authorId = getValueId("name", newVinyl.author, authors);
-    let genreId = getValueId("type", newVinyl.genre, genres);
+    const authorId = getValueId("name", newVinyl.author, authors);
+    const genreId = getValueId("type", newVinyl.genre, genres);
 
     if (authorId !== null) {
         newVinyl.author = authorId;
+    } else {
+        const newAuthor = { id: getNewId(authors), "name": newVinyl.author }
+        authors.push(newAuthor);
+        addData("./data/authors.json", authors);
+
+        newVinyl.author = newAuthor.id;
     }
+
     if (genreId !== null) {
         newVinyl.genre = genreId;
+    } else {
+        const newGenre = { id: getNewId(genres), "type": newVinyl.genre };
+        genres.push(newGenre);
+        addData("./data/genres.json", genres);
+
+        newVinyl.genre = newGenre.id;
     }
-
-    //! L'utente darà { title: "titolo", author: "nome autore", genre: "tipo genere"} 
-    //TODO l'utente passa dei dati solo con un nuovo titolo, ma autore e genere esistente nelle collezioni
-    //TODO -> assegnare ad author l'id in base alla collezione già presente, cosi come per il genere
-
-
-    //TODO l'utente passa dei dati con un nuovo titolo, ma anche nuovo autore o anche un nuovo genere
-    //TODO -> aggiungere un nuovo autore o un nuovo genere, e eseguire l'operazione precedente
 
     vinyls.push(newVinyl);
     addData("./data/vinyls.json", vinyls);
