@@ -44,8 +44,9 @@ function getAllVinyls() {
     let disks = [...vinyls];
 
     disks.forEach((disk, index, arr) => {
-        let authorName = (authors.filter((author) => { return author.id == disk.author }))[0].name;
-        let genreType = (genres.filter((genre) => { return genre.id == disk.genre }))[0].type;
+        let authorName = (authors.find((author) => { return author.id == disk.author })).name;
+        let genreType = (genres.find((genre) => { return genre.id == disk.genre })).type;
+
         arr[index] = { ...disk, author: authorName, genre: genreType };
     });
 
@@ -68,8 +69,8 @@ function getAllGenres() {
 function getVinylInfo(diskId) {
     let disk = vinyls.find((vinyl) => { return vinyl.id === parseInt(diskId) });
 
-    let authorName = (authors.filter((author) => { return author.id === disk.author }))[0].name;
-    let genreType = (genres.filter((genre) => { return genre.id === disk.genre }))[0].type;
+    let authorName = (authors.find((author) => { return author.id === disk.author })).name;
+    let genreType = (genres.find((genre) => { return genre.id === disk.genre })).type;
     disk = { ...disk, author: authorName, genre: genreType };
 
     return disk;
@@ -80,8 +81,8 @@ function getAuthorVinyls(authorId) {
     let disks = [...vinyls].filter((vinyl) => { return vinyl.author === parseInt(authorId) });
 
     disks.forEach((disk, index, arr) => {
-        let authorName = (authors.filter((author) => { return author.id === disk.author }))[0].name;
-        let genreType = (genres.filter((genre) => { return genre.id === disk.genre }))[0].type;
+        let authorName = (authors.find((author) => { return author.id === disk.author })).name;
+        let genreType = (genres.find((genre) => { return genre.id === disk.genre })).type;
         arr[index] = { ...disk, author: authorName, genre: genreType };
     });
     return disks;
@@ -92,8 +93,8 @@ function getVinylsByGenre(genreId) {
     let disks = [...vinyls].filter((vinyl) => { return vinyl.genre === parseInt(genreId) });
 
     disks.forEach((disk, index, arr) => {
-        let authorName = (authors.filter((author) => { return author.id === disk.author }))[0].name;
-        let genreType = (genres.filter((genre) => { return genre.id === disk.genre }))[0].type;
+        let authorName = (authors.find((author) => { return author.id === disk.author })).name;
+        let genreType = (genres.find((genre) => { return genre.id === disk.genre })).type;
         arr[index] = { ...disk, author: authorName, genre: genreType };
     });
     return disks;
