@@ -34,5 +34,11 @@
         "title": "A love supreme",
         "author": 6,
         "genre": 4
+    },
+    {
+        "id": 7,
+        "title": "Music to Be Murdered By",
+        "author": 7,
+        "genre": 5
     }
 ]

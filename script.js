@@ -117,36 +117,30 @@ function getValueId(prop, val, arr) {
 }
 
 //Effettua il controllo dei dati mandati dall'utente per aggiungere un nuovo disco
-function formatPostVinylData(){
-    //TODO spostare e generalizzare i controlli effettuati nella funzione postVinyl()
+function formatPostVinylData(prop1, prop2, value, newVinyl, arr) {
+    if (value === null) {
+        const newObj = { id: getNewId(arr) }
+        newObj[prop1] = newVinyl[prop2];
+
+        arr.push(newObj);
+        addData(`./data/${prop2}s.json`, arr);
+
+        newVinyl[prop2] = newObj.id;
+        return newVinyl;
+    }
+    newVinyl[prop2] = value;
+    return newVinyl;
 }
 
 //Aggiunge un nuovo disco
 function postVinyl(data) {
-    const newVinyl = { id: getNewId(vinyls), ...data };
+    let newVinyl = { id: getNewId(vinyls), ...data };
 
     const authorId = getValueId("name", newVinyl.author, authors);
     const genreId = getValueId("type", newVinyl.genre, genres);
 
-    if (authorId !== null) {
-        newVinyl.author = authorId;
-    } else {
-        const newAuthor = { id: getNewId(authors), "name": newVinyl.author }
-        authors.push(newAuthor);
-        addData("./data/authors.json", authors);
-
-        newVinyl.author = newAuthor.id;
-    }
-
-    if (genreId !== null) {
-        newVinyl.genre = genreId;
-    } else {
-        const newGenre = { id: getNewId(genres), "type": newVinyl.genre };
-        genres.push(newGenre);
-        addData("./data/genres.json", genres);
-
-        newVinyl.genre = newGenre.id;
-    }
+    newVinyl = formatPostVinylData("name", "author", authorId, newVinyl, authors);
+    newVinyl = formatPostVinylData("type", "genre", genreId, newVinyl, genres);
 
     vinyls.push(newVinyl);
     addData("./data/vinyls.json", vinyls);
