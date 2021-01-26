@@ -119,15 +119,31 @@ function getValueId(prop, val, arr) {
 //Effettua il controllo dei dati mandati dall'utente per aggiungere un nuovo disco
 function formatPostVinylData(prop1, prop2, value, newVinyl, arr) {
     if (value === null) {
+        //Se value e' null, allora creo un nuovo autore o genre nuovo con un nuovo id
         const newObj = { id: getNewId(arr) }
+
+        //e alla proprieta' prop1 assegno il valore della proprieta' prop2 di newVinyl
+        /*  Esempio:
+            newVinyl = { id: "valore", title: "titolo", 
+                            author: "author nuovo", genre: "genere nuovo" }
+            Per autore o genere nuovo sin intende che non e' presente nel file json
+            Se prop1 = "name" -> prop2 = "author"
+            Se prop1 = "type" -> prop2 = "genre"
+         */
         newObj[prop1] = newVinyl[prop2];
 
+        //Update dell'array e salvataggio su file
         arr.push(newObj);
         addData(`./data/${prop2}s.json`, arr);
 
+        //Infine si associa alla proprieta' prop2 di newVinyl l'id del nuovo autore o genere
         newVinyl[prop2] = newObj.id;
         return newVinyl;
     }
+
+    //Nel caso in cui value non e' null, allora l'autore o il genere esistono gia' in precedenza
+    //e quindi basta settare alla proprieta' prop2 di newVinyl l'id dell' autore o genere
+    //ovvero value
     newVinyl[prop2] = value;
     return newVinyl;
 }
