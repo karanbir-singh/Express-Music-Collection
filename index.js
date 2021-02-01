@@ -87,7 +87,6 @@ app.post('/authors', (req, res) => {
 
 //> Aggiunge un nuovo disco POST /genres
 app.post('/genres', (req, res, next) => {
-
     try {
         console.log(req.body);
         fs.postGenre(req.body);
@@ -96,7 +95,7 @@ app.post('/genres', (req, res, next) => {
         console.error(err);
         res.sendStatus(500);
     }
-    
+
 });
 
 //!---------------------------------------------------------------------------------------------------------------------------------------
