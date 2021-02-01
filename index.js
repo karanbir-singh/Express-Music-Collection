@@ -6,8 +6,8 @@ const cors = require('cors');
 const app = express();
 
 //Content-Type: application/json e CORS
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 //* Socket
 const hostname = 'localhost';
@@ -86,14 +86,17 @@ app.post('/authors', (req, res) => {
 });
 
 //> Aggiunge un nuovo disco POST /genres
-app.post('/genres', (req, res) => {
+app.post('/genres', (req, res, next) => {
+
     try {
+        console.log(req.body);
         fs.postGenre(req.body);
         res.sendStatus(200);
     } catch (err) {
-        console.error("Errore nell'aggiunta di un genere");
+        console.error(err);
         res.sendStatus(500);
     }
+    
 });
 
 //!---------------------------------------------------------------------------------------------------------------------------------------
